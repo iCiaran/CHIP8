@@ -42,6 +42,8 @@ public class Chip8 {
             bus.write(Device.RAM, start + i, program[i]);
         }
 
+        cpu.setR_PC(start);
+
     }
 
     public void loadProgram(String filename) {

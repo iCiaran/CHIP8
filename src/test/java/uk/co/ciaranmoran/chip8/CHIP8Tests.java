@@ -1,21 +1,22 @@
-/*
- * Copyright 2015-2018 the original author or authors.
- *
- * All rights reserved. This program and the accompanying materials are
- * made available under the terms of the Eclipse Public License v2.0 which
- * accompanies this distribution and is available at
- *
- * http://www.eclipse.org/legal/epl-v20.html
- */
-
 package uk.co.ciaranmoran.chip8;
 
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 
 
 class CHIP8Tests {
+
+    @ParameterizedTest
+    @CsvSource({
+            "true,         0x600",
+            "false,        0x200"
+    })
+    void InitialPCValue(boolean ETI660, int start) {
+        Chip8 chip8 = new Chip8();
+        chip8.loadProgram("",ETI660);
+        assertEquals(chip8.cpu.r_PC, start);
+    }
 
 }
