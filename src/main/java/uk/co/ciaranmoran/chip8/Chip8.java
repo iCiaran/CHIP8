@@ -37,7 +37,19 @@ class Chip8 {
             program = new byte[0];
         }
 
-        for(int i = start; i < start + program.length; i++) {
+        for (int i = 0; i < program.length; i++) {
+            bus.write(Device.RAM, start + i, program[i]);
+        }
+
+        cpu.setR_PC(start);
+    }
+
+    void loadProgram(byte[] program, boolean ETI660) {
+        if (program == null) program = new byte[0];
+
+        int start = ETI660 ? 0x600 : 0x200;
+
+        for (int i = 0; i < program.length; i++) {
             bus.write(Device.RAM, start + i, program[i]);
         }
 
