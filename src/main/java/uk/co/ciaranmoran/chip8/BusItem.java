@@ -1,6 +1,6 @@
 package uk.co.ciaranmoran.chip8;
 
-public interface Connectable {
+public interface BusItem {
 
     void write(int address, int data);
 

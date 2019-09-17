@@ -1,8 +1,8 @@
 package uk.co.ciaranmoran.chip8;
 
-public class Input implements Connectable{
+public class Input implements BusItem {
 
-    public Input(Bus bus) {
+    Input(Bus bus) {
         bus.addToBus(Chip8.Device.INPUT, this);
     }
 

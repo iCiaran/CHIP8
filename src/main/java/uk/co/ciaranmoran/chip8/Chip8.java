@@ -1,17 +1,16 @@
 package uk.co.ciaranmoran.chip8;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class Chip8 {
+class Chip8 {
 
-    Bus bus;
+    private Bus bus;
     Cpu cpu;
-    Display display;
-    Ram ram;
-    Input input;
+    private Display display;
+    private Ram ram;
+    private Input input;
 
     enum Device {
         CPU,
@@ -20,7 +19,7 @@ public class Chip8 {
         INPUT
     }
 
-    public Chip8() {
+    Chip8() {
         bus = new Bus();
         cpu = new Cpu(bus);
         display = new Display(bus, 62, 32);
@@ -28,7 +27,7 @@ public class Chip8 {
         input = new Input(bus);
     }
 
-    public void loadProgram(String filename, boolean ETI660) {
+    void loadProgram(String filename, boolean ETI660) {
         int start = ETI660 ? 0x600 : 0x200;
         byte[] program;
 
@@ -43,10 +42,13 @@ public class Chip8 {
         }
 
         cpu.setR_PC(start);
-
     }
 
     public void loadProgram(String filename) {
         loadProgram(filename, false);
+    }
+
+    void clock(int n) {
+        cpu.clock(n);
     }
 }

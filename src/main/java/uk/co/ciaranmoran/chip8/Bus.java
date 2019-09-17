@@ -3,14 +3,14 @@ package uk.co.ciaranmoran.chip8;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Bus {
-    Map<Chip8.Device, Connectable> bus;
+class Bus {
+    private Map<Chip8.Device, BusItem> bus;
 
-    public Bus() {
+    Bus() {
         bus = new HashMap<>();
     }
 
-    void addToBus(Chip8.Device device, Connectable item) {
+    void addToBus(Chip8.Device device, BusItem item) {
         bus.put(device, item);
     }
 

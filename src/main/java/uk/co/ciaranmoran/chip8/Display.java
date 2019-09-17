@@ -1,14 +1,11 @@
 package uk.co.ciaranmoran.chip8;
 
-public class Display implements Connectable {
+public class Display implements BusItem {
 
-    Bus bus;
-    boolean[] data;
+    private boolean[] data;
 
-    public Display(Bus bus, int width, int height) {
+    Display(Bus bus, int width, int height) {
         bus.addToBus(Chip8.Device.DISPLAY, this);
-        this.bus = bus;
-
         data = new boolean[width * height];
     }
 

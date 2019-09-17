@@ -1,13 +1,11 @@
 package uk.co.ciaranmoran.chip8;
 
-public class Ram implements Connectable{
+public class Ram implements BusItem {
 
-    Bus bus;
-    int[] data;
+    private int[] data;
 
-    public Ram(Bus bus) {
+    Ram(Bus bus) {
         bus.addToBus(Chip8.Device.RAM, this);
-        this.bus = bus;
         data = new int[0xFFF];
     }
 

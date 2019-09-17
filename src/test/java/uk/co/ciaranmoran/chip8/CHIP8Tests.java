@@ -16,7 +16,7 @@ class CHIP8Tests {
     void InitialPCValue(boolean ETI660, int start) {
         Chip8 chip8 = new Chip8();
         chip8.loadProgram("",ETI660);
-        assertEquals(chip8.cpu.r_PC, start);
+        assertEquals(chip8.cpu.getR_PC(), start);
     }
 
 }
