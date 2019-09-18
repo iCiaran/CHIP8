@@ -2,8 +2,8 @@ package uk.co.ciaranmoran.chip8;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
 class CHIP8Tests {
@@ -15,7 +15,7 @@ class CHIP8Tests {
     })
     void InitialPCValue(boolean ETI660, int start) {
         Chip8 chip8 = new Chip8();
-        chip8.loadProgram("",ETI660);
+        chip8.loadProgram("", ETI660);
         assertEquals(chip8.cpu.getR_PC(), start);
     }
 
