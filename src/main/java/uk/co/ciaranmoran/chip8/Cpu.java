@@ -69,7 +69,7 @@ public class Cpu implements BusItem {
 
         switch (nibbles[0]) {
             case 0x0:
-                //0___
+                //0_XX
                 switch (lower) {
                     case 0xE0:
                         //00E0 - CLS -> Clear the display
@@ -96,7 +96,7 @@ public class Cpu implements BusItem {
                 //4xkk - SNE Vx, byte -> Skip next instruction if Vx != kk
                 break;
             case 0x5:
-                //5___
+                //5__X
                 switch (nibbles[3]) {
                     case 0x0:
                         //5xy0 - SE Vx, Vy -> Skip next instruction if Vx = Vy
@@ -113,7 +113,7 @@ public class Cpu implements BusItem {
                 //7xkk - ADD Vx, byte -> Set Vx = Vx + kk
                 break;
             case 0x8:
-                //8___
+                //8__X
                 switch (nibbles[3]) {
                     case 0x0:
                         //8xy0 - LD Vx, Vy -> Set Vx = Vy
@@ -148,7 +148,7 @@ public class Cpu implements BusItem {
                 }
                 break;
             case 0x9:
-                //0___
+                //9__X
                 switch (nibbles[3]) {
                     case 0x0:
                         //9xy0 - SNE Vx, Vy -> Skip next instruction if Vx != Vy
@@ -172,7 +172,7 @@ public class Cpu implements BusItem {
                 //                            at memory location I at (Vx, Vy), set VF = collision
                 break;
             case 0xE:
-                //E___
+                //E_XX
                 switch (lower) {
                     case 0x9E:
                         //Ex9E - SKP Vx -> Skip next instruction if key with the value of Vx is pressed
@@ -186,7 +186,7 @@ public class Cpu implements BusItem {
                 }
                 break;
             case 0xF:
-                //F___
+                //F_XX
                 switch (lower) {
                     case 0x07:
                         //Fx07 - LD Vx, DT -> Set Vx = delay timer value
