@@ -6,7 +6,7 @@ public class Ram implements BusItem {
 
     Ram(Bus bus) {
         bus.addToBus(Chip8.Device.RAM, this);
-        data = new int[0xFFF];
+        data = new int[0x1000];
     }
 
     @Override

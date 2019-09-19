@@ -22,4 +22,8 @@ class Bus {
         bus.get(device).write(address, data);
     }
 
+    BusItem get(Chip8.Device device) {
+        return bus.get(device);
+    }
+
 }
