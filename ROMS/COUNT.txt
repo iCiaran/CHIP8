@@ -2,6 +2,7 @@
 6C02 - Store 0x02 to VC
 6B07 - Store 0x07 to VB
 6A0C - Store 0x0C to VA
+693C - Store 0x3C to V9
 00E0 - Clear Screen
 AF00 - Move 0xF00 to I
 FE33 - Store BCD VE to 0xF00 - 0xF02
@@ -13,7 +14,10 @@ DBD5 - Draw 2nd digit
 F229 - Set I to location of 3rd digit
 DAD5 - Draw 3rd digit
 7E01 - Add 1 to VE
-1208 - Jump to Clear screen
-
-//TODO Add delay before jump
-0x6D, 0x02, 0x6C, 0x02, 0x6B, 0x07, 0x6A, 0x0C, 0x00, 0xE0, 0xAF, 0x00, 0xFE, 0x33, 0xF2, 0x65, 0xF0, 0x29, 0xDC, 0xD5, 0xF1, 0x29, 0xDB, 0xD5, 0xF2, 0x29, 0xDA, 0xD5, 0x7E, 0x01, 0x12, 0x08
+F915 - Set delay timer to value of V9
+F807 - Set V8 to delay timer value
+3800 - Skip next instruction if V8 is 0x00
+1222 - Jump to "Set V8 to delay timer value"
+120A - Jump to "Clear screen"
+#
+# Counts up once a second

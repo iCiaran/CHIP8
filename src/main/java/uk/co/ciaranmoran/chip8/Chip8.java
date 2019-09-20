@@ -59,7 +59,7 @@ class Chip8 {
         cpu.setR_PC(start);
     }
 
-    public void loadProgram(String filename) {
+    void loadProgram(String filename) {
         loadProgram(filename, false);
     }
 

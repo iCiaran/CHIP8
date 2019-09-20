@@ -620,7 +620,6 @@ public class Cpu implements BusItem {
         }
         r_V[0xF] = erased;
 
-        //System.out.println(bus.get(Chip8.Device.DISPLAY));
     }
 
     /**

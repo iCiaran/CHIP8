@@ -25,7 +25,7 @@ public class Main {
 
         Chip8 chip8 = new Chip8();
         int[] program = {0x00, 0xE0, 0x60, 0x00, 0x61, 0x3E, 0x62, 0x1E, 0xF0, 0x29, 0xD1, 0x25, 0x12, 0x00};
-        chip8.loadProgram(program, false);
+        chip8.loadProgram(args[0]);
         chip8.loadFont(font);
 
         long start = System.nanoTime();
@@ -33,7 +33,6 @@ public class Main {
         while (true) {
             dt = (System.nanoTime() - start);
             if (dt >= PERIOD) {
-                System.out.println(dt);
                 start = System.nanoTime();
                 chip8.clock((int) (dt / PERIOD));
             }
