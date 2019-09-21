@@ -8,6 +8,7 @@ public class Cpu implements BusItem {
     /*
      * Internal
      */
+
     private int[] r_S;
     private int[] r_V;
     private int r_I;
@@ -25,7 +26,23 @@ public class Cpu implements BusItem {
 
     private Bus bus;
 
+    // True to use value from register Y when shifting
+    // False to use value from register X when shifting
+    private final boolean shiftBehaviour;
+
+    // True to wrap when drawing
+    // False to truncate sprite if out of bounds
+    private final boolean drawBehaviour;
+
+    // True to increment I when storing/loading to/from RAM
+    // False to not alter I
+    private final boolean storeBehaviour;
+
     Cpu(Bus bus, int fontStart) {
+        this(bus, fontStart, false, false, false);
+    }
+
+    Cpu(Bus bus, int fontStart, boolean shiftBehaviour, boolean drawBehaviour, boolean storeBehaviour) {
         bus.addToBus(Chip8.Device.CPU, this);
         this.bus = bus;
 
@@ -37,6 +54,11 @@ public class Cpu implements BusItem {
         r_SP = -1;
 
         rand = new Random();
+
+        this.shiftBehaviour = shiftBehaviour;
+        this.drawBehaviour = drawBehaviour;
+        this.storeBehaviour = storeBehaviour;
+
     }
 
     void clock(int n) {
@@ -498,8 +520,8 @@ public class Cpu implements BusItem {
      * @param y A 4-bit value, the upper 4 bits of the low byte of the instruction
      */
     private void SHRVV(int x, int y) {
-        r_V[0xF] = r_V[y] & 0x1;
-        r_V[x] = r_V[y] >> 1;
+        r_V[0xF] = r_V[shiftBehaviour ? y : x] & 0x1;
+        r_V[x] = r_V[shiftBehaviour ? y : x] >> 1;
     }
 
     /**
@@ -525,8 +547,8 @@ public class Cpu implements BusItem {
      * Set register VF to the most significant bit prior to the shift
      */
     private void SHLVV(int x, int y) {
-        r_V[0xF] = (r_V[y] & 0x80) >> 7;
-        r_V[x] = (r_V[y] << 1) & 0xFF;
+        r_V[0xF] = (r_V[shiftBehaviour ? y : x] >> 7) & 0x1;
+        r_V[x] = (r_V[shiftBehaviour ? y : x] << 1) & 0xFF;
     }
 
     /**
@@ -758,7 +780,9 @@ public class Cpu implements BusItem {
         for (int i = 0; i <= x; i++) {
             bus.write(Chip8.Device.RAM, r_I + i, r_V[i]);
         }
-        r_I = r_I + x + 1;
+        if (storeBehaviour) {
+            r_I = r_I + x + 1;
+        }
     }
 
     /**
@@ -771,7 +795,9 @@ public class Cpu implements BusItem {
         for (int i = 0; i <= x; i++) {
             r_V[i] = bus.read(Chip8.Device.RAM, r_I + i);
         }
-        r_I = r_I + x + 1;
+        if (storeBehaviour) {
+            r_I = r_I + x + 1;
+        }
     }
 
 }
